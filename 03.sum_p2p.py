@@ -13,7 +13,7 @@ rank = comm.Get_rank()
 # dapatkan total proses berjalan
 size = comm.Get_size()
 
-# generate angka integer secara random untuk setiap proses
+# generate angka integer secara random untuk setiap prosess
 randomangka = random.randint(1,5)
 
 # jika saya adalah proses dengan rank 0 maka:
@@ -25,7 +25,7 @@ if rank == 0:
         data = comm.recv(source=i, tag=rank)
         print(data)
         sum += data['send']
-    print("Sum - ", sum)
+    print("Sum  ", sum)
 # jika bukan proses dengan rank 0, saya akan mengirimkan nilai proses saya ke proses dengan rank=0
 else:
     data = {'rank': rank, 'dest': 0, 'send': randomangka}
