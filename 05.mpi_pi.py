@@ -10,7 +10,8 @@ def local_loop(num_steps,begin,end):
     sum = 0
     # 4/(1+x^2)
     for i in range(begin,end):
-        
+        y = ((i+0.5)*step)
+        sum = sum + 4.0/(1.0+y*y)
     print (sum)
     return sum    
 
@@ -18,24 +19,24 @@ def local_loop(num_steps,begin,end):
 def Pi(num_steps):
     
     # buat COMM
-    
+    comm = MPI.COMM_WORLD
     
     # dapatkan rank proses
-    
+    rank = comm.Get_rank()
     
     # dapatkan total proses berjalan
-    
+    size = comm.Get_size()
     
     # buat variabel baru yang merupakan num_steps/total proses
-    
+    total_proses = num_steps/size
     
     # cari local_sum
     # local_sum merupakan hasil dari memanggil fungsi local_loop
-    
+    local_sum = local_loop(num_steps,int(rank*total_proses),int((rank+1)*total_proses))
     
     # lakukan penjumlahan dari local_sum proses-proses yang ada ke proses 0
     # bisa digunakan reduce atau p2p sum
-    
+    sum = comm.allreduce(local_sum, op=MPI.SUM)
     
     # jika saya proses dengan rank 0  maka tampilkan hasilnya
     if rank == 0:
