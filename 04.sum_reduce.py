@@ -14,7 +14,7 @@ rank = comm.Get_rank()
 size = comm.Get_size()
 
 # generate angka integer secara random untuk setiap proses
-intrandom = random.radint(1,10)
+intrandom = random.randint(1,5)
 
 # lakukam penjumlahan dengan teknik reduce, root reduce adalah proses dengan rank 0
 penjumlahan = comm.allreduce(intrandom, op=MPI.SUM)
