@@ -14,7 +14,7 @@ rank = comm.Get_rank()
 size = comm.Get_size()
 
 # generate angka integer secara random untuk setiap proses
-randomangka = random.radint(1,5)
+randomangka = random.randint(1,5)
 
 # jika saya adalah proses dengan rank 0 maka:
 # saya menerima nilai dari proses 1 s.d proses dengan rank terbesar
